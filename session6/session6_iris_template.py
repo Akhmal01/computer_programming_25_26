@@ -48,11 +48,11 @@ class IrisRuleClassifier:
                                are predicted as setosa.
         """
         # Store the threshold as an attribute on self.
-        # self.threshold = <your code here>
+        self.threshold = 2.0
 
         # We enforce these attribute names so later sessions can reuse your class.
-        # self.positive_label = <your code here>   # should be the string "setosa"
-        # self.negative_label = <your code here>   # should be the string "not_setosa"
+        self.positive_label = "setosa"   # should be the string "setosa"
+        self.negative_label = "not_setosa"   # should be the string "not_setosa"
         pass
 
     def print_status(self, status_text):
@@ -68,6 +68,10 @@ class IrisRuleClassifier:
 
     # Task 2: Implement compute_threshold_prediction
     def compute_threshold_prediction(self, sample):
+        if sample["petal_length"] < self.threshold:
+            return settings["self.positive_label"]
+        return settings["self.negative_label"]
+
         """Predict the label for one flower sample using the threshold rule.
 
         Compare sample["petal_length"] to self.threshold.
@@ -88,13 +92,16 @@ class IrisRuleClassifier:
 
     # Task 3: Implement derive_true_label
     def derive_true_label(self, sample):
+        if sample["species"] == settings["positive_label"]:
+            return settings["positive_label"]
+        return settings["negative_label"]
         """Convert the real species name into the lesson label.
 
         The dataset has three species, but this classifier only uses two
         lesson labels: self.positive_label ("setosa") and
         self.negative_label ("not_setosa").
 
-        This method has one job: return the correct lesson label for one sample.
+      This method has one job: return the correct lesson label for one sample.
         It does NOT update any counters.
 
         Args:
